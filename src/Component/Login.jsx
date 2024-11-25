@@ -1,10 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Header from './Header'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from'axios';
 
 function Login() {
+  const [values, setValues] = useState({
+    email: "",
+    matkhau: ""
+  });
+
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:4000/login", values)
+      .then(res => {
+        if (res.data.Status === "Success") {
+          navigate('/');
+        } else {
+          alert("Tài khoản hoặc mật khẩu không đúng");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Có lỗi xảy ra trong quá trình đăng nhập.");
+      });
+  };
+
+  const handleSubmit = (e) => {
+    setValues(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+  console.log(values);
   return (
     <div>
       <Header/>
@@ -19,24 +50,27 @@ function Login() {
       <div className="col-md-6 bg-white p-5">
         <h3 className="pb-3">Login Form</h3>
         <div className="form-style">
-          <form >
+          <form onSubmit={handleLogin} >
             <div className="form-group pb-3">
               <input
-                type="email"
+              type="text"
+                name="email"
                 placeholder="Email"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
+                onChange={handleSubmit}
                
               />
             </div>
             <div className="form-group pb-3">
               <input
+                name="matkhau"
                 type="password"
-                placeholder="Password"
+                placeholder="matkhau"
                 className="form-control"
                 id="exampleInputPassword1"
-               
+                onChange={handleSubmit}
               />
             </div>
             <div className="d-flex align-items-center justify-content-between">

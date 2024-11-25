@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function ProductDetail() {
+  const [product,setProduct]=useState([]);
+  const parmas=useParams();
+  const id=parmas.id
+  useEffect(()=>{
+    axios.get('http://localhost:4000/product/'+id)
+    .then(res=>setProduct(res.data))
+    .catch(err=>console.log(err))
+  },[])
   return (
     <div>
           <>
           <Header/>
+          {product.map((product,i)=>{
+            return(
   <div className="chitiet mt-4 ml-5 ">
     <div className="container">
       <div className="row">
@@ -15,8 +27,8 @@ function ProductDetail() {
           </a>
         </div>
         <div className="col-6 thongtin  ">
-          <h4>Nike af1</h4>
-          <p>1,789,000₫</p>
+          <h4>{product.tensp}</h4>
+          <p>{product.gia}</p>
           <div className="size mt-5">
             <h6>Select size</h6>
             <div className="row">
@@ -63,6 +75,8 @@ function ProductDetail() {
       </div>
     </div>
   </div>
+  )
+})}
   {/* end chi tiet sp */}
   <div className="splienquan">
     <div className="container"></div>

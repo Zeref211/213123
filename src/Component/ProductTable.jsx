@@ -9,12 +9,13 @@ function ProductTable(props) {
         <div className="col-4">
       <div className="sp mt-4 ">
         <div className="card">
-            
+            <Link to={`/ProductDetail/${props.id}`}>
           <img
             className="card-img-top img-sp"
             src="https://placehold.co/400"
             alt="Card image"
           />
+          </Link>
           <div className="card-body">
             <h4 className="card-title tille text-center">
               {props.tensp}

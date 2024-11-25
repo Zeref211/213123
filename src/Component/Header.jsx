@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Sreach from './Sreach';
 
 function Header() {
   return (
@@ -19,6 +20,7 @@ function Header() {
     <a href="#">Contact</a>
     <a href="#">Mail</a>
   </nav>
+  <Sreach/>
   <div className="right">
     <a href="" classname="icon">
     <FontAwesomeIcon icon={faCartShopping} />

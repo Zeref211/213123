@@ -12,7 +12,7 @@ function Product() {
     .then(res=>setProduct(res.data))
     .catch(err=>console.log("sai r"))
     
-  })
+  },[])
   
   return (
     
@@ -21,8 +21,10 @@ function Product() {
       <div className="container">
   <div className="row">
       {product.map((product,i)=>{
-        
-    <ProductTable id={product.masp} tensp={product.tensp} gia={product.gia} hinh={product.hinh}/>
+        return(
+          <ProductTable id={product.masp} tensp={product.tensp} gia={product.gia} hinh={product.hinh}/>
+        )
+    
   })}
   </div>
 </div>
